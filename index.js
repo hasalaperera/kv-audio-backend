@@ -3,7 +3,10 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import userRouter from "./routes/userRouter.js";
 import productRouter from "./routes/productRouter.js";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 let app = express();
 
@@ -32,7 +35,7 @@ app.use((req,res,next)=>{
 })
 
 
-let mongoUrl = "mongodb+srv://Hasala:gRWgzehsjpHNrePU@cluster0.ep5aw.mongodb.net/skyrec?retryWrites=true&w=majority&appName=Cluster0" //backend connection
+let mongoUrl = process.env.MONGO_URL; //backend connection
 
 mongoose.connect(mongoUrl)
 
