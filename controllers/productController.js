@@ -29,3 +29,4 @@ export function addProduct(req,res){
         res.status(500).json({error:"Product addition failed"})
     })
 }
+
