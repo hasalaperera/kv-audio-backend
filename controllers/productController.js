@@ -1,6 +1,6 @@
 import Product from "../models/product.js";
 
-export function addProduct(req,res){
+export async function addProduct(req,res){
     console.log(req.user)
 
     // to check is thare any user
@@ -21,12 +21,11 @@ export function addProduct(req,res){
     // to check if the product is valid
     const data = req.body
     const newProduct = new Product(data)
-    newProduct.save()
-    .then(()=>{
+    try{
+        await newProduct.save()
         res.json({message:"Product added successfully"})
-    })
-    .catch((error)=>{
+    }catch(error){
         res.status(500).json({error:"Product addition failed"})
-    })
+    }
 }
 
