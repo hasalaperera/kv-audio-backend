@@ -57,6 +57,9 @@ export function loginUser(req, res) {
 }
 
 
+
+
+// Middlewares
 export function isITAdmin(req) {
   let isAdmin = false;
   if (req.user != null) {
@@ -66,4 +69,15 @@ export function isITAdmin(req) {
   }
 
   return isAdmin;
+}
+
+export function isItCustomer(req){
+  let isCustomer = false;
+
+  if(req.user != null){
+    if(req.user.role == "customer"){
+      isCustomer = true;
+      }
+  }
+  return isCustomer;
 }
