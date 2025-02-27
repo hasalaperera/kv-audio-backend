@@ -54,7 +54,7 @@ export async function updateProduct(req, res) {
 
         const data = req.body
 
-        await Product.updateOne({key:key},{data})
+        await Product.updateOne({key:key},data)
 
         res.json({
             message: "Product updated successfully",
