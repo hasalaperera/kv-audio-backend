@@ -1,3 +1,4 @@
+import Inquiry from "../models/inquiry.js";
 import { isItCustomer } from "./userController.js";
 
 export async function addInquiry(req,res)
@@ -9,7 +10,28 @@ export async function addInquiry(req,res)
         data.email = req.user.email
         data.phone = req.user.phone
 
-        // i am sleep
+        // id genarate
+        let id = 0;
+
+        // get data from database and sort and limit
+        const inquiries = await Inquiry.find().sort({ id: -1 }).limit(1); 
+
+        if(inquiries.length == 0){
+            id = 1
+        }else{
+            id = inquiries[0].id + 1
+        }
+
+        data.id = id
+
+        const newInquiry = new Inquiry(data)
+        const response = await newInquiry.save()
+
+        res.json({
+            message : "Inquiry added successfully",
+            id : response.id
+        })
+
     }
 
    } catch(e){
